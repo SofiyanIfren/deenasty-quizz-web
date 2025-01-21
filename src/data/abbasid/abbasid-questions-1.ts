@@ -1,13 +1,13 @@
 import { QuizMetadata } from '../../types/question';
 
-export const abbasidQuizMetadata: QuizMetadata = {
+export const abbasidQuizMetadata1: QuizMetadata = {
   id: "abbasid-1",
   title: "Les Abbassides - Partie 1",
   description: "Questions sur la dynastie Abbasside et son histoire",
   totalQuestions: 10
 };
 
-export const abbasidQuestions = [
+export const abbasidQuestions1 = [
     {
         "id_question": "abas_th1_01",
         "text_question": "Il est le calife mis en scène dans le 'Conte des Mille et Une Nuits'. C'est respectivement le fils et petit-fils des califes Al Mahdi et Abou Ja'far Al Mansour. Il s'agit de",
