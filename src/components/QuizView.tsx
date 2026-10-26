@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { QuizCard } from './QuizCard';
 import { QuizState } from '../types/question';
-import { BookOpen, Award, Trophy } from 'lucide-react';
+import { Award, Trophy, ArrowLeft } from 'lucide-react';
 import { getQuizQuestions, getQuizMetadata } from '../data/quizzes';
 
 interface QuizViewProps {
@@ -69,31 +69,40 @@ export const QuizView: React.FC<QuizViewProps> = ({
 
   if (isQuizComplete) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full text-center">
-          <Award className="w-16 h-16 text-blue-600 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">Quiz Terminé!</h1>
-          <div className="space-y-4 mb-6">
-            <p className="text-lg text-gray-600">
-              Score de ce quiz: {currentScore} / 10
-            </p>
-            <div className="flex items-center justify-center gap-2 text-lg text-blue-600">
-              <Trophy className="w-6 h-6" />
-              <p>Score total: {totalScore} points</p>
+      <div className="min-h-screen bg-[#fbf9f4] flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 max-w-md w-full text-center border border-[#ebdda0]/60 animate-fade-in">
+          <div className="w-20 h-20 rounded-full bg-[#ebdda0]/30 text-[#187206] flex items-center justify-center mx-auto mb-4 border border-[#ebdda0]">
+            <Award className="w-10 h-10" />
+          </div>
+          <h1 className="text-2xl font-bold text-[#222222] mb-1">Quiz Terminé !</h1>
+          <p className="text-sm font-medium text-[#187206] mb-6">{metadata.title}</p>
+          
+          <div className="bg-[#ebdda0]/20 rounded-xl p-4 space-y-3 mb-6 border border-[#ebdda0]/50">
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-gray-600">Score de cette série :</span>
+              <span className="font-bold text-[#187206] text-lg">{currentScore} / 10</span>
+            </div>
+            <div className="flex items-center justify-between text-sm border-t border-[#ebdda0]/40 pt-2 text-[#222222]">
+              <div className="flex items-center gap-1.5 font-semibold text-[#187206]">
+                <Trophy className="w-4 h-4 text-[#187206]" />
+                <span>Score total cumulé :</span>
+              </div>
+              <span className="font-bold text-base text-[#187206]">{totalScore + currentScore} points</span>
             </div>
           </div>
+
           <div className="space-y-3">
             <button
               onClick={handleRestart}
-              className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              className="w-full bg-[#187206] text-white px-6 py-3.5 rounded-xl font-bold hover:bg-[#135c05] transition shadow-md active:scale-98"
             >
               Recommencer ce Quiz
             </button>
             <button
               onClick={() => onComplete(currentScore)}
-              className="w-full bg-gray-100 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors"
+              className="w-full bg-[#ebdda0] text-[#222222] px-6 py-3.5 rounded-xl font-bold hover:bg-[#e4d493] transition active:scale-98 shadow-sm"
             >
-              Retour aux Quiz
+              Retourner aux Quiz
             </button>
           </div>
         </div>
@@ -101,33 +110,45 @@ export const QuizView: React.FC<QuizViewProps> = ({
     );
   }
 
+  const progressPercent = ((questionCount + 1) / 10) * 100;
+
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <BookOpen className="w-8 h-8 text-blue-600 mr-3" />
-              <div>
-                <h1 className="text-2xl font-bold text-gray-800">Quiz Islamique</h1>
-                <p className="text-sm text-gray-600">{metadata.title}</p>
-              </div>
+    <div className="min-h-screen bg-[#fbf9f4] flex flex-col">
+      <header className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-30 border-b border-[#ebdda0]/40">
+        <div className="max-w-4xl mx-auto px-4 py-3 sm:px-6">
+          <div className="flex items-center justify-between gap-2">
+            <button
+              onClick={onExit}
+              className="flex items-center gap-1.5 text-gray-600 hover:text-[#187206] p-1.5 rounded-lg hover:bg-[#ebdda0]/20 transition text-sm font-semibold"
+              title="Retourner à la liste des quiz"
+            >
+              <ArrowLeft className="w-5 h-5 text-[#187206]" />
+              <span className="hidden sm:inline">Quitter</span>
+            </button>
+
+            <div className="text-center flex-1 mx-2 min-w-0">
+              <h1 className="text-base sm:text-lg font-bold text-[#187206] truncate">{metadata.title}</h1>
+              <p className="text-xs text-gray-500 font-medium">Question {questionCount + 1} sur 10</p>
             </div>
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2 text-blue-600">
-                <Trophy className="w-5 h-5" />
-                <span>{totalScore} points</span>
-              </div>
-              <div className="text-gray-600">
-                Question {questionCount + 1} / 10
-              </div>
+
+            <div className="flex items-center gap-1.5 text-[#187206] bg-[#ebdda0]/30 px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-[#ebdda0]">
+              <Trophy className="w-4 h-4 text-[#187206]" />
+              <span>{totalScore + currentScore} pts</span>
             </div>
+          </div>
+
+          {/* Progress Bar with Brand Colors */}
+          <div className="w-full bg-[#ebdda0]/40 h-2 rounded-full mt-3 overflow-hidden">
+            <div
+              className="bg-[#187206] h-full rounded-full transition-all duration-300 ease-out"
+              style={{ width: `${progressPercent}%` }}
+            />
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center">
+      <main className="max-w-4xl w-full mx-auto px-4 py-6 sm:px-6 flex-1 flex flex-col items-center justify-center">
+        <div className="w-full flex flex-col items-center">
           <QuizCard
             question={quizState.currentQuestion}
             onAnswer={handleAnswer}
@@ -138,9 +159,9 @@ export const QuizView: React.FC<QuizViewProps> = ({
           {quizState.showAnswer && (
             <button
               onClick={handleNext}
-              className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              className="mt-6 w-full max-w-2xl bg-[#187206] text-white px-6 py-3.5 rounded-xl font-bold hover:bg-[#135c05] shadow-lg transition active:scale-[0.99]"
             >
-              {questionCount === 9 ? 'Voir les Résultats' : 'Question Suivante'}
+              {questionCount === 9 ? 'Voir les Résultats' : 'Question Suivante →'}
             </button>
           )}
         </div>

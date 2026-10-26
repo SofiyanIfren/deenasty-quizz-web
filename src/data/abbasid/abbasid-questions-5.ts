@@ -1,4 +1,4 @@
-import { Question, QuizMetadata } from '../../types/question';
+import { QuizMetadata } from '../../types/question';
 
 export const abbasidQuizMetadata5: QuizMetadata = {
   id: "abbasid-5",

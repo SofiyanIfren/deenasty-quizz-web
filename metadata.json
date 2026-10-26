@@ -1,0 +1,7 @@
+{
+  "name": "Deenasty Quiz",
+  "description": "Interactive Islamic history quiz application exploring the Rashidun, Umayyad, Abbasid, Andalusian, and Ottoman caliphates.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

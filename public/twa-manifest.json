@@ -1,0 +1,17 @@
+{
+  "packageId": "app.deenasty.quiz",
+  "host": "ais-pre-n3kte6y7ib2elc2ld5xzov-132576806915.europe-west2.run.app",
+  "name": "Deenasty Quiz",
+  "launcherName": "Deenasty",
+  "themeColor": "#187206",
+  "navigationColor": "#222222",
+  "backgroundColor": "#FBF9F4",
+  "enableNotifications": false,
+  "startUrl": "/",
+  "iconUrl": "/pwa-512x512.png",
+  "maskableIconUrl": "/pwa-maskable-512x512.png",
+  "appVersionCode": 1,
+  "appVersionName": "1.0.0",
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli"
+}

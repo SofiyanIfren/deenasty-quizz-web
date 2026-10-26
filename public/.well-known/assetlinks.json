@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.deenasty.quiz",
+      "sha256_cert_fingerprints": [
+        "DEFAULT_PENDING_RELEASE_KEYSTORE_SHA256"
+      ]
+    }
+  }
+]
